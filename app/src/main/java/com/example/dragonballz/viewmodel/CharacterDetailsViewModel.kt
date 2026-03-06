@@ -53,7 +53,7 @@ class CharacterDetailsViewModel(
         }
     }
 
-    fun getCharacterDetails() {
+    private fun getCharacterDetails() {
         viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true) }
 

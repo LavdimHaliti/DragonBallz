@@ -51,7 +51,7 @@ class CharacterListViewModel(
         }
     }
 
-    fun fetchCharacters() {
+    private fun fetchCharacters() {
         viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true) }
             checkConnectivity()
