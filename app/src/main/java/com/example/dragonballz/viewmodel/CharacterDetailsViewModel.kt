@@ -12,6 +12,13 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
+/**
+ * ViewModel for CharacterDetailsFragment.
+ *
+ * @param id The ID of the character to display details for.
+ * @param repository The repository to use for data operations.
+ * @param context The application context.
+ */
 class CharacterDetailsViewModel(
     private val id: Int,
     private val repository: CharacterRepository,

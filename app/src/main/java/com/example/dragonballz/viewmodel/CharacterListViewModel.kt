@@ -14,6 +14,9 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
+/**
+ * ViewModel for handling character list UI state and interactions.
+ */
 class CharacterListViewModel(
     private val repository: CharacterRepository,
     private val context: Application

@@ -8,6 +8,11 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 
+/**
+ * ViewModel for managing favorite characters.
+ *
+ * This ViewModel provides a stream of favorite characters from the repository and exposes it as a StateFlow.
+ */
 class FavoriteCharactersViewModel(
     private val repository: CharacterRepository
 ) : ViewModel() {
