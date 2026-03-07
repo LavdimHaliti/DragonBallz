@@ -62,10 +62,8 @@ fun DragonBallzNavGraph(navController: NavHostController) {
             )
         }
 
-        composable(route = Screen.CompareCharacters.route) { backStackEntry ->
-            val args = backStackEntry.arguments?.getString("characters")?.toIntOrNull() ?: 0
+        composable(route = Screen.CompareCharacters.route) {
             CharacterCompareScreen(
-                characters = args,
                 navigateBack = { navController.navigateUp() }
             )
         }

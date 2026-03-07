@@ -43,13 +43,11 @@ import com.example.dragonballz.data.domain.CharacterDomain
 import com.example.dragonballz.ui.states.CharacterCompareUiState
 import com.example.dragonballz.viewmodel.CharacterCompareViewModel
 import org.koin.androidx.compose.koinViewModel
-import org.koin.core.parameter.parametersOf
 
 @Composable
 fun CharacterCompareScreen(
-    characters: Int,
     navigateBack: () -> Unit,
-    viewModel: CharacterCompareViewModel = koinViewModel { parametersOf(characters) }
+    viewModel: CharacterCompareViewModel = koinViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 

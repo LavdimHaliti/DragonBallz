@@ -31,6 +31,7 @@ class CharacterListViewModel(
         fetchCharacters()
     }
 
+    // Retrieve cached characters from database
     private fun getCharactersFromDatabase() {
         viewModelScope.launch {
             repository.getCachedCharactersFlow()
@@ -42,6 +43,7 @@ class CharacterListViewModel(
         }
     }
 
+    // Check network connectivity
     private fun checkConnectivity() {
         viewModelScope.launch {
             NetworkUtils(context).isConnected.collect { connectStatus ->
@@ -51,6 +53,7 @@ class CharacterListViewModel(
         }
     }
 
+    // Fetch characters from API
     private fun fetchCharacters() {
         viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true) }
@@ -71,7 +74,9 @@ class CharacterListViewModel(
         }
     }
 
+    // Load more characters from API
     fun loadMoreCharacters() {
+        // Prevent multiple simultaneous loads
         if (_uiState.value.isLoadingMore || _uiState.value.query.isNotBlank()) {
             return
         }
@@ -85,6 +90,7 @@ class CharacterListViewModel(
         }
     }
 
+    // Search for a character
     private fun searchCharacter(query: String) {
         viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true) }
@@ -112,6 +118,7 @@ class CharacterListViewModel(
         }
     }
 
+    // Update search query and fetch characters
     fun updateSearchQuery(query: String) {
         _uiState.update { it.copy(query = query) }
         job?.cancel()
@@ -125,6 +132,7 @@ class CharacterListViewModel(
         }
     }
 
+    // Refresh characters from API
     fun refreshCharacters() {
         _uiState.update { it.copy(isRefreshing = true) }
         checkConnectivity()

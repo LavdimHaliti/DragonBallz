@@ -27,6 +27,7 @@ class CharacterDetailsViewModel(
         getCharacterFromDatabase()
     }
 
+    // Check internet connection
     private fun checkConnectivity() {
         viewModelScope.launch {
             NetworkUtils(context).isConnected.collect { connectStatus ->
@@ -36,6 +37,7 @@ class CharacterDetailsViewModel(
         }
     }
 
+    // Get character from database
     private fun getCharacterFromDatabase() {
         viewModelScope.launch {
             repository.getCachedCharacterFlow(id)
@@ -53,6 +55,7 @@ class CharacterDetailsViewModel(
         }
     }
 
+    // Get character details from API
     private fun getCharacterDetails() {
         viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true) }
@@ -69,6 +72,7 @@ class CharacterDetailsViewModel(
         }
     }
 
+    // Toggle favorite status
     fun toggleFavorite() {
         viewModelScope.launch {
             if (_uiState.value.isFavorite) {

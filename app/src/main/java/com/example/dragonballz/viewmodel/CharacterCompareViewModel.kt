@@ -12,7 +12,6 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class CharacterCompareViewModel(
-    private val characters: Int,
     private val repository: CharacterRepository
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(CharacterCompareUiState())
@@ -25,6 +24,7 @@ class CharacterCompareViewModel(
         getCharactersFromDatabase()
     }
 
+    // Fetch characters from the database and update the UI state
     private fun getCharactersFromDatabase() {
         viewModelScope.launch {
             repository.getCachedCharactersFlow()
@@ -36,48 +36,25 @@ class CharacterCompareViewModel(
         }
     }
 
-//    private fun getCharactersFromDatabase() {
-//        viewModelScope.launch {
-//            _uiState.update { it.copy(isLoading = true) }
-//
-//            val characterCount = repository.getTotalCachedCharacters()
-//            val result = repository.fetchCharacters(1, characterCount)
-//
-//            result.onSuccess { characterDomains ->
-//                _uiState.update {
-//                    it.copy(
-//                        isLoading = false,
-//                        characters = characterDomains,
-//                        firstCharacter = firstCharacter,
-//                        secondCharacter = secondCharacter
-//                    )
-//                }
-//            }.onFailure { exception ->
-//                _uiState.update {
-//                    it.copy(
-//                        isLoading = false,
-//                        errorMessage = exception.message ?: "Can't load characters"
-//                    )
-//                }
-//            }
-//        }
-//    }
-
+    // Select the first character and update the UI state
     fun selectFirstCharacter(character: CharacterDomain) {
         firstCharacter = character
         _uiState.update { it.copy(firstCharacter = firstCharacter) }
         updateSelection()
     }
 
+    // Select the second character and update the UI state
     fun selectSecondCharacter(character: CharacterDomain) {
         secondCharacter = character
         _uiState.update { it.copy(secondCharacter = secondCharacter) }
         updateSelection()
     }
 
+    // Update the UI state based on the selected characters
     private fun updateSelection() {
         val first = firstCharacter
         val second = secondCharacter
+
         val stronger = when {
             first == null || second == null -> null
             extractNumericKi(first.ki) > extractNumericKi(second.ki) -> first
@@ -92,7 +69,8 @@ class CharacterCompareViewModel(
         }
     }
 
-    fun compareCharacters(): String? {
+    // Compare the two selected characters and return the result
+    private fun compareCharacters(): String? {
         val first = firstCharacter ?: return null
         val second = secondCharacter ?: return null
         val firstKi = extractNumericKi(first.ki)
@@ -105,6 +83,7 @@ class CharacterCompareViewModel(
         }
     }
 
+    // Extract numeric value from the Ki string
     private fun extractNumericKi(ki: String?): Long {
         return ki?.replace(",", "")?.replace(".", "")?.toLongOrNull() ?: 0
     }

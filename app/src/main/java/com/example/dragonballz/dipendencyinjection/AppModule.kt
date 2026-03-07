@@ -62,5 +62,5 @@ val viewModelModule = module {
     viewModel { CharacterListViewModel(get(), get()) }
     viewModel { CharacterDetailsViewModel(get(), get(), get()) }
     viewModel { FavoriteCharactersViewModel(get()) }
-    viewModel { CharacterCompareViewModel(get(), get()) }
+    viewModel { CharacterCompareViewModel(get()) }
 }
