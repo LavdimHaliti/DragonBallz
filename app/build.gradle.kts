@@ -71,6 +71,7 @@ dependencies {
     implementation("io.coil-kt.coil3:coil-compose:3.3.0")
     implementation("io.coil-kt.coil3:coil-network-okhttp:3.3.0")
 
+    //koin
     implementation("io.insert-koin:koin-androidx-compose:4.1.1")
     implementation("io.insert-koin:koin-core:4.1.1")
     implementation("io.insert-koin:koin-android:4.1.1")
